@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>benji — nonchalant maltese</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1724;
+    --card:#0b1320;
+    --accent:#7bd389;
+    --muted:#94a3b8;
+    --glass: rgba(255,255,255,0.04);
+    --neon: rgba(123,211,137,0.12);
+    --white: #f8fafc;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: radial-gradient(1200px 400px at 10% 10%, rgba(123,211,137,0.03), transparent),
+                linear-gradient(180deg,#071024 0%, #071827 40%, #071827 100%);
+    color:var(--white);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+    line-height:1.45;
+  }
+
+  /* header */
+  header{
+    position:relative;
+    padding:36px clamp(18px,6vw,48px);
+    display:flex;
+    gap:24px;
+    align-items:center;
+    justify-content:space-between;
+    backdrop-filter: blur(6px);
+  }
+  .logo{
+    display:flex;gap:14px;align-items:center;
+  }
+  .logo .mark{
+    width:72px;height:72px;border-radius:18px;
+    background:linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    display:grid;place-items:center;
+    box-shadow: 0 6px 24px rgba(3,6,10,0.6), inset 0 -2px 8px rgba(0,0,0,0.4);
+    transform: rotate(-6deg);
+    animation: float 6s ease-in-out infinite;
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .logo h1{margin:0;font-weight:800;letter-spacing:-0.02em;font-size:20px}
+  .logo p{margin:0;color:var(--muted);font-size:12px}
+
+  nav{display:flex;gap:12px;align-items:center;}
+  .btn{
+    background:transparent;border:1px solid rgba(255,255,255,0.06);
+    color:var(--white);padding:10px 14px;border-radius:12px;font-weight:600;font-size:14px;
+    cursor:pointer;backdrop-filter: blur(4px);
+    transition: all .28s ease;
+  }
+  .btn:hover{transform: translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+  .cta{background:linear-gradient(90deg,var(--accent), #5eead4); color:#052018;border:none}
+
+  /* hero */
+  .hero{
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:36px;
+    align-items:center;
+    padding:40px clamp(18px,6vw,48px);
+    margin-top:12px;
+  }
+  .hero-card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:20px;padding:28px;
+    border:1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 8px 40px rgba(2,6,12,0.6);
+    overflow:hidden;
+  }
+
+  .intro{
+    display:flex;flex-direction:column;gap:16px;
+    animation: reveal .8s ease both;
+  }
+  .intro h2{margin:0;font-size:44px;line-height:1.02}
+  .intro .sub{color:var(--muted);font-size:16px}
+  .traits{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+  .pill{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);font-weight:600;background:var(--glass);font-size:13px;color:var(--muted)}
+
+  /* photo column */
+  .card-aside{
+    position:relative;overflow:visible;
+  }
+  .benji-photo{
+    width:100%;height:420px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:grid;place-items:center;
+    box-shadow: 0 10px 40px rgba(2,6,12,0.6);
+  }
+  .benji-photo img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.03);filter:contrast(1.03) saturate(1.02);}
+  .floating-paw{
+    position:absolute;right:-20px;top:30px;width:120px;height:120px;border-radius:50%;
+    display:grid;place-items:center;font-size:36px;
+    background: linear-gradient(135deg,var(--neon), transparent); color:#052018;
+    border:1px solid rgba(255,255,255,0.02);
+    transform: rotate(-10deg);
+    animation: float 5s ease-in-out infinite;
+    box-shadow: 0 8px 36px rgba(9,12,16,0.5);
+  }
+
+  /* grid of content */
+  .grid{
+    display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;
+    padding:28px clamp(18px,6vw,48px);
+  }
+  .panel{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+    min-height:140px;position:relative;overflow:hidden;
+    transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+  }
+  .panel:hover{transform: translateY(-8px) rotate(-0.6deg); box-shadow: 0 18px 60px rgba(2,6,12,0.7)}
+  .panel h3{margin-top:0;margin-bottom:10px;font-size:16px}
+  .small{font-size:13px;color:var(--muted)}
+
+  /* playlist */
+  .playlist{display:flex;flex-direction:column;gap:12px}
+  .track{
+    display:flex;gap:12px;align-items:center;padding:8px;border-radius:10px;
+    background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    border:1px solid rgba(255,255,255,0.02);
+  }
+  .track img{width:64px;height:64px;border-radius:10px;object-fit:cover}
+  .track .meta{flex:1}
+  .track .meta strong{display:block}
+  .track .meta span{display:block;color:var(--muted);font-size:13px}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px;display:block;transition: transform .3s ease;box-shadow: 0 6px 20px rgba(0,0,0,0.45)}
+  .gallery img:hover{transform:translateY(-8px) scale(1.04)}
+
+  /* matcha area */
+  .matcha{
+    display:flex;gap:18px;align-items:center;
+  }
+  .matcha img{width:140px;height:140px;border-radius:12px;object-fit:cover;flex-shrink:0}
+
+  /* timeline */
+  .timeline{display:flex;flex-direction:column;gap:10px}
+  .event{display:flex;gap:12px;align-items:flex-start}
+  .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);margin-top:6px;box-shadow:0 6px 18px rgba(123,211,137,0.12)}
+  .event .desc{color:var(--muted);font-size:14px}
+
+  /* footer */
+  footer{padding:30px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02)}
+
+  /* small screens */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr;grid-auto-rows:auto}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:640px){
+    header{padding:18px}
+    .grid{grid-template-columns:1fr}
+    .gallery{grid-template-columns:1fr}
+  }
+
+  /* keyframes */
+  @keyframes reveal { from{opacity:0; transform: translateY(8px)} to{opacity:1; transform:none} }
+  @keyframes float { 0%{transform: translateY(0) rotate(-6deg)} 50%{transform: translateY(-8px) rotate(-2deg)} 100%{transform: translateY(0) rotate(-6deg)} }
+
+  /* tiny easter paw */
+  .paw{
+    position:fixed;left:14px;bottom:18px;width:48px;height:48px;border-radius:12px;
+    display:grid;place-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);cursor:pointer;z-index:60;
+    box-shadow:0 6px 24px rgba(2,6,12,0.6);
+  }
+  .popover{
+    position:fixed;left:74px;bottom:26px;background:var(--card);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+    display:none;color:var(--muted);font-size:13px;
+  }
+  .paw:hover + .popover{display:block;animation: reveal .2s ease both}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="mark">
+      <!-- simple SVG paw -->
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+        <path d="M12 13c-2.8 0-6 1.4-6 4v1h12v-1c0-2.6-3.2-4-6-4z" fill="#052018" />
+        <ellipse cx="7.5" cy="6.5" rx="1.9" ry="2.6" fill="#052018"/>
+        <ellipse cx="16.5" cy="6.2" rx="1.9" ry="2.3" fill="#052018"/>
+        <ellipse cx="9.2" cy="3.2" rx="1.6" ry="1.8" fill="#052018"/>
+        <ellipse cx="14.8" cy="3.5" rx="1.6" ry="1.9" fill="#052018"/>
+      </svg>
+    </div>
+    <div>
+      <h1>benji</h1>
+      <p>nonchalant maltese · somber playlists · matcha appreciator</p>
+    </div>
+  </div>
+
+  <nav>
+    <button class="btn">About</button>
+    <button class="btn">Gallery</button>
+    <button class="btn">Playlist</button>
+    <button class="btn cta">Treats</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-card">
+    <div class="intro">
+      <h2>benji — cool, white, and quietly profound</h2>
+      <div class="sub">Benji is a white Maltese with an aura of detached elegance. He nods at lo-fi beats, judges you subtly, and enjoys ceremonial matcha (for the vibes).</div>
+
+      <div class="traits" aria-hidden>
+        <span class="pill">Breed: Maltese</span>
+        <span class="pill">Age: 3 years</span>
+        <span class="pill">Aura: Nonchalant</span>
+        <span class="pill">Fav Genre: Somber indie / lo-fi / bedroom pop</span>
+        <span class="pill">Ritual: Matcha-watching</span>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
+        <button class="btn">See gallery</button>
+        <button class="btn cta">Listen to benji's playlist</button>
+      </div>
+
+      <div style="margin-top:18px;color:var(--muted);font-size:13px">
+        <strong>Personality dossier:</strong>
+        <p style="margin:6px 0">Benji prefers slow sunbeams, long naps in geometric patches of light, and a melodic hum of minimal piano while he contemplates life. He is unimpressed with loud toys but adores soft vinyl crackle and the faint steam hiss of matcha being whisked. He will stare into the distance until you apologize for your existence — then accept a treat.</p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="card-aside">
+    <div class="benji-photo">
+      <!-- working, dynamic image fetching from Unsplash by query -->
+      <img src="https://source.unsplash.com/800x1000/?white+maltese" alt="Benji the Maltese">
+    </div>
+    <div class="floating-paw">🐾</div>
+  </aside>
+</section>
+
+<!-- dense information grid -->
+<section class="grid" aria-label="benji information">
+  <div class="panel">
+    <h3>Signature Sounds — Playlist & influences</h3>
+    <p class="small">Benji's sonic world: lo-fi piano, melancholic singer-songwriter, low-volume ambient, analog tape textures.</p>
+    <div class="playlist" style="margin-top:10px">
+      <div class="track">
+        <img src="https://source.unsplash.com/80x80/?vinyl,music" alt="">
+        <div class="meta">
+          <strong>Track: Rain On The Window</strong>
+          <span>Artist: Pale Room · 3:28 · mood: contemplative</span>
+        </div>
+        <div style="font-weight:700;color:var(--muted)">♡</div>
+      </div>
+
+      <div class="track">
+        <img src="https://source.unsplash.com/80x80/?piano,lofi" alt="">
+        <div class="meta">
+          <strong>Track: Green Tea Tape</strong>
+          <span>Artist: Matcha Hour · 2:44 · mood: warm static</span>
+        </div>
+        <div style="font-weight:700;color:var(--muted)">♡</div>
+      </div>
+
+      <div class="track">
+        <img src="https://source.unsplash.com/80x80/?ambient,album" alt="">
+        <div class="meta">
+          <strong>Track: Slow Sun</strong>
+          <span>Artist: Dusk / Loft · 4:16 · mood: slow exhale</span>
+        </div>
+        <div style="font-weight:700;color:var(--muted)">♡</div>
+      </div>
+
+      <p class="small" style="margin-top:8px">Tip: Play at low volume with gentle vinyl cracks for optimal Benji approval.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Matcha Rituals</h3>
+    <div class="matcha">
+      <img src="https://source.unsplash.com/320x320/?matcha,tea" alt="matcha">
+      <div>
+        <p class="small">Benji respects matcha ceremony aesthetics — the whisk motion, the delicate foam, the quiet hum of a kettle. He will approach politely, sniff, and then resume his contemplative stare. Here's a micro-ritual:</p>
+        <ol class="small" style="margin:8px 0 0 18px">
+          <li>Whisk matcha slowly, in circular strokes.</li>
+          <li>Place cup at low angle where Benji naps.</li>
+          <li>Allow 10 seconds of silence while Benji inspects the rim.</li>
+          <li>Sip. Offer a treat (tiny, dog-safe), never the hot tea.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Health & Care (extensive)</h3>
+    <p class="small">Benji's routine and notes — grooming, diet, exercise, vet schedule.</p>
+    <ul class="small" style="margin:8px 0 0 18px">
+      <li>Grooming: weekly brushing; full groom every 8–10 weeks.</li>
+      <li>Diet: high-quality small-breed kibble + occasional steamed sweet potato.</li>
+      <li>Exercise: 20–30 min walks & indoor scent games.</li>
+      <li>Vet: vaccinations up to date; dental clean recommended annually.</li>
+      <li>Allergies: mild seasonal sniffles — monitored.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Gallery (action & stills)</h3>
+    <div class="gallery" style="margin-top:10px">
+      <img src="https://source.unsplash.com/400x300/?maltese,dog" alt="">
+      <img src="https://source.unsplash.com/400x300/?maltese,puppy" alt="">
+      <img src="https://source.unsplash.com/400x300/?cute,white+dog" alt="">
+      <img src="https://source.unsplash.com/400x300/?dog,grass" alt="">
+      <img src="https://source.unsplash.com/400x300/?dog,park" alt="">
+      <img src="https://source.unsplash.com/400x300/?maltese,portrait" alt="">
+    </div>
+    <p class="small" style="margin-top:10px">Hover each image for a subtle lift. Replace these with Benji's personal photos by swapping the `src` URLs.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Timeline: benji's life in tiny epochs</h3>
+    <div class="timeline" style="margin-top:8px">
+      <div class="event"><div class="dot"></div><div class="desc">Born on a rainy Tuesday — first nap at 3 hours old.</div></div>
+      <div class="event"><div class="dot"></div><div class="desc">First matcha encounter — inspected the whisk, ignored the steam.</div></div>
+      <div class="event"><div class="dot"></div><div class="desc">Discovered soft jazz; now prefers somber guitar at dawn.</div></div>
+      <div class="event"><div class="dot"></div><div class="desc">Made a friend named Olive (the neighborhood cat) — mutual disdain achieved.</div></div>
+    </div>
+  </div>
+
+  <div class="panel" style="grid-column:span 3">
+    <h3>Obsessive details (because you asked for overwhelming info)</h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px">
+      <div style="background:var(--glass);padding:10px;border-radius:8px">
+        <strong>Sleep Cycle</strong>
+        <p class="small">16–18h/day; peak contemplation 2–4pm.</p>
+      </div>
+      <div style="background:var(--glass);padding:10px;border-radius:8px">
+        <strong>Favorite toy</strong>
+        <p class="small">Worn beige sock-shaped squeaker (relegated to aesthetic duty now).</p>
+      </div>
+      <div style="background:var(--glass);padding:10px;border-radius:8px">
+        <strong>Command responsiveness</strong>
+        <p class="small">Responds to whisper+hand wave; ignores capital-letter shouting.</p>
+      </div>
+      <div style="background:var(--glass);padding:10px;border-radius:8px">
+        <strong>Photogenic index</strong>
+        <p class="small">High — prefers side-lighting and soft shadows. Bring props: matcha bowl + vintage vinyl.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:10px;color:var(--muted);font-size:13px">
+      <p><strong>Detailed notes:</strong> Benji will exhibit mild head-tilt when you play minor-key piano. He prefers sofa corners and will relocate to wherever the sunbeam flows. He judges laser pointers, approves of slow hand scratches, and will accept photographers who kneel.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <strong>benji</strong> · white maltese · <span style="color:var(--muted)">resident matcha connoisseur</span>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center">
+    <span class="small">Built with ✨ for Benji</span>
+    <button class="btn">Download PDF</button>
+  </div>
+</footer>
+
+<div class="paw" title="peek">🐶</div>
+<div class="popover">Benji demands respectful silence and gentle snacks. Click the gallery to see more.</div>
+
+<!-- small script for a few UI niceties -->
+<script>
+  // small lazy loading and click behaviors
+  document.querySelectorAll('img').forEach(img=>{
+    img.loading = 'lazy';
+  });
+
+  // Download placeholder: generate printable page
+  document.querySelector('footer .btn').addEventListener('click', async ()=>{
+    alert('To get a printable profile, use Print → Save as PDF in your browser. Want me to auto-generate a PDF? Ask and I will create one for download.');
+  });
+
+  // paw popover toggle (mobile friendly)
+  const paw = document.querySelector('.paw');
+  paw.addEventListener('click', ()=> {
+    const pop = document.querySelector('.popover');
+    pop.style.display = pop.style.display === 'block' ? 'none' : 'block';
+    setTimeout(()=>{ if(pop.style.display==='block') pop.style.display = 'none'; }, 6000);
+  });
+</script>
+</body>
+</html>

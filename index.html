@@ -1,403 +1,426 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>benji — nonchalant maltese</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Benji — The Performative Maltese</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
 <style>
-  :root{
-    --bg:#0f1724;
-    --card:#0b1320;
-    --accent:#7bd389;
-    --muted:#94a3b8;
-    --glass: rgba(255,255,255,0.04);
-    --neon: rgba(123,211,137,0.12);
-    --white: #f8fafc;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background: radial-gradient(1200px 400px at 10% 10%, rgba(123,211,137,0.03), transparent),
-                linear-gradient(180deg,#071024 0%, #071827 40%, #071827 100%);
-    color:var(--white);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-    line-height:1.45;
+  :root {
+    --bg: #0a0a0a;
+    --text-light: #f5f5f5;
+    --accent: #ef233c;
+    --muted: #888;
+    --glass: rgba(255, 255, 255, 0.05);
+    --neon-accent: rgba(239, 35, 60, 0.15);
+    --font-sans: 'Inter', system-ui, sans-serif;
   }
 
-  /* header */
-  header{
-    position:relative;
-    padding:36px clamp(18px,6vw,48px);
-    display:flex;
-    gap:24px;
-    align-items:center;
-    justify-content:space-between;
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--text-light);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    background: #000;
+    z-index: 10;
+  }
+  header h1 {
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.04em;
+    font-style: italic;
+  }
+  header nav button {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+  }
+  header nav button:hover {
+    background: var(--accent);
+    color: var(--text-light);
+  }
+
+  /* Hero Section */
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3rem 3rem 6rem;
+    gap: 2.5rem;
+    align-items: center;
+    background:
+      linear-gradient(135deg, rgba(239,35,60,0.15), transparent),
+      url('https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+    position: relative;
+    color: var(--text-light);
+    min-height: 500px;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #000d 0%, #000 90%);
+    pointer-events: none;
+  }
+  .hero-content {
+    flex: 1 1 420px;
+    z-index: 1;
+    max-width: 480px;
+  }
+  .hero-content h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+    font-style: italic;
+  }
+  .hero-content p {
+    font-size: 1.125rem;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-bottom: 1.25rem;
+  }
+  .hero-content .traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1.75rem;
+  }
+  .trait-pill {
+    background: var(--glass);
+    border: 1.5px solid var(--accent);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--accent);
     backdrop-filter: blur(6px);
   }
-  .logo{
-    display:flex;gap:14px;align-items:center;
+  .hero-content .btn-group button {
+    margin-right: 1rem;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.65rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    background: var(--accent);
+    color: var(--text-light);
+    box-shadow: 0 8px 30px var(--neon-accent);
+    transition: transform 0.3s ease;
   }
-  .logo .mark{
-    width:72px;height:72px;border-radius:18px;
-    background:linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-    display:grid;place-items:center;
-    box-shadow: 0 6px 24px rgba(3,6,10,0.6), inset 0 -2px 8px rgba(0,0,0,0.4);
-    transform: rotate(-6deg);
-    animation: float 6s ease-in-out infinite;
-    border:1px solid rgba(255,255,255,0.04);
-  }
-  .logo h1{margin:0;font-weight:800;letter-spacing:-0.02em;font-size:20px}
-  .logo p{margin:0;color:var(--muted);font-size:12px}
-
-  nav{display:flex;gap:12px;align-items:center;}
-  .btn{
-    background:transparent;border:1px solid rgba(255,255,255,0.06);
-    color:var(--white);padding:10px 14px;border-radius:12px;font-weight:600;font-size:14px;
-    cursor:pointer;backdrop-filter: blur(4px);
-    transition: all .28s ease;
-  }
-  .btn:hover{transform: translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.6)}
-  .cta{background:linear-gradient(90deg,var(--accent), #5eead4); color:#052018;border:none}
-
-  /* hero */
-  .hero{
-    display:grid;
-    grid-template-columns: 1fr 420px;
-    gap:36px;
-    align-items:center;
-    padding:40px clamp(18px,6vw,48px);
-    margin-top:12px;
-  }
-  .hero-card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:20px;padding:28px;
-    border:1px solid rgba(255,255,255,0.03);
-    box-shadow: 0 8px 40px rgba(2,6,12,0.6);
-    overflow:hidden;
+  .hero-content .btn-group button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px var(--neon-accent);
   }
 
-  .intro{
-    display:flex;flex-direction:column;gap:16px;
-    animation: reveal .8s ease both;
+  .hero-image {
+    flex: 1 1 380px;
+    max-width: 380px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px #ef233c88;
+    border: 3px solid var(--accent);
+    background: #111;
+    position: relative;
+    z-index: 2;
   }
-  .intro h2{margin:0;font-size:44px;line-height:1.02}
-  .intro .sub{color:var(--muted);font-size:16px}
-  .traits{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
-  .pill{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);font-weight:600;background:var(--glass);font-size:13px;color:var(--muted)}
-
-  /* photo column */
-  .card-aside{
-    position:relative;overflow:visible;
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: contrast(1.1) saturate(1.2);
   }
-  .benji-photo{
-    width:100%;height:420px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    display:grid;place-items:center;
-    box-shadow: 0 10px 40px rgba(2,6,12,0.6);
-  }
-  .benji-photo img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.03);filter:contrast(1.03) saturate(1.02);}
-  .floating-paw{
-    position:absolute;right:-20px;top:30px;width:120px;height:120px;border-radius:50%;
-    display:grid;place-items:center;font-size:36px;
-    background: linear-gradient(135deg,var(--neon), transparent); color:#052018;
-    border:1px solid rgba(255,255,255,0.02);
-    transform: rotate(-10deg);
+  .floating-paw {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 48px;
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent);
     animation: float 5s ease-in-out infinite;
-    box-shadow: 0 8px 36px rgba(9,12,16,0.5);
   }
 
-  /* grid of content */
-  .grid{
-    display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;
-    padding:28px clamp(18px,6vw,48px);
+  /* Grid info */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+    padding: 0 3rem 4rem;
   }
-  .panel{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);
-    min-height:140px;position:relative;overflow:hidden;
-    transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+  .card {
+    background: var(--glass);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid var(--accent);
+    box-shadow: 0 12px 30px var(--neon-accent);
+    backdrop-filter: blur(8px);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
   }
-  .panel:hover{transform: translateY(-8px) rotate(-0.6deg); box-shadow: 0 18px 60px rgba(2,6,12,0.7)}
-  .panel h3{margin-top:0;margin-bottom:10px;font-size:16px}
-  .small{font-size:13px;color:var(--muted)}
-
-  /* playlist */
-  .playlist{display:flex;flex-direction:column;gap:12px}
-  .track{
-    display:flex;gap:12px;align-items:center;padding:8px;border-radius:10px;
-    background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-    border:1px solid rgba(255,255,255,0.02);
+  .card h3 {
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.3rem;
+    font-style: italic;
   }
-  .track img{width:64px;height:64px;border-radius:10px;object-fit:cover}
-  .track .meta{flex:1}
-  .track .meta strong{display:block}
-  .track .meta span{display:block;color:var(--muted);font-size:13px}
-
-  /* gallery */
-  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px;display:block;transition: transform .3s ease;box-shadow: 0 6px 20px rgba(0,0,0,0.45)}
-  .gallery img:hover{transform:translateY(-8px) scale(1.04)}
-
-  /* matcha area */
-  .matcha{
-    display:flex;gap:18px;align-items:center;
+  .card p, .card li {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.4;
   }
-  .matcha img{width:140px;height:140px;border-radius:12px;object-fit:cover;flex-shrink:0}
-
-  /* timeline */
-  .timeline{display:flex;flex-direction:column;gap:10px}
-  .event{display:flex;gap:12px;align-items:flex-start}
-  .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);margin-top:6px;box-shadow:0 6px 18px rgba(123,211,137,0.12)}
-  .event .desc{color:var(--muted);font-size:14px}
-
-  /* footer */
-  footer{padding:30px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02)}
-
-  /* small screens */
-  @media (max-width:980px){
-    .hero{grid-template-columns:1fr;grid-auto-rows:auto}
-    .grid{grid-template-columns:repeat(2,1fr)}
-    .gallery{grid-template-columns:repeat(2,1fr)}
-  }
-  @media (max-width:640px){
-    header{padding:18px}
-    .grid{grid-template-columns:1fr}
-    .gallery{grid-template-columns:1fr}
+  .card ul {
+    margin: 0;
+    padding-left: 1.25rem;
   }
 
-  /* keyframes */
-  @keyframes reveal { from{opacity:0; transform: translateY(8px)} to{opacity:1; transform:none} }
-  @keyframes float { 0%{transform: translateY(0) rotate(-6deg)} 50%{transform: translateY(-8px) rotate(-2deg)} 100%{transform: translateY(0) rotate(-6deg)} }
+  /* Music section */
+  .music-embed {
+    margin-top: 1rem;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 24px var(--neon-accent);
+  }
 
-  /* tiny easter paw */
-  .paw{
-    position:fixed;left:14px;bottom:18px;width:48px;height:48px;border-radius:12px;
-    display:grid;place-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.03);cursor:pointer;z-index:60;
-    box-shadow:0 6px 24px rgba(2,6,12,0.6);
+  /* Flip Cards for Fun Facts */
+  .flip-container {
+    perspective: 1000px;
+    cursor: pointer;
   }
-  .popover{
-    position:fixed;left:74px;bottom:26px;background:var(--card);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
-    display:none;color:var(--muted);font-size:13px;
+  .flip-card {
+    width: 100%;
+    height: 160px;
+    background: var(--glass);
+    border-radius: 20px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: 2px solid var(--accent);
+    box-shadow: 0 12px 30px var(--neon-accent);
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    position: relative;
   }
-  .paw:hover + .popover{display:block;animation: reveal .2s ease both}
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  .flip-container:hover .flip-card-inner,
+  .flip-container:focus-within .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 1rem;
+  }
+  .flip-card-front {
+    background: var(--glass);
+    color: var(--accent);
+  }
+  .flip-card-back {
+    background: var(--accent);
+    color: var(--text-light);
+    transform: rotateY(180deg);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  /* Footer */
+  footer {
+    padding: 2rem 3rem;
+    background: #111;
+    border-top: 1px solid #222;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg);}
+    50% { transform: translateY(-12px) rotate(15deg);}
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      padding: 2rem 2rem 4rem;
+    }
+    .hero-content {
+      max-width: 100%;
+    }
+    .hero-image {
+      max-width: 100%;
+      margin-top: 1.5rem;
+    }
+    header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <div class="mark">
-      <!-- simple SVG paw -->
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <path d="M12 13c-2.8 0-6 1.4-6 4v1h12v-1c0-2.6-3.2-4-6-4z" fill="#052018" />
-        <ellipse cx="7.5" cy="6.5" rx="1.9" ry="2.6" fill="#052018"/>
-        <ellipse cx="16.5" cy="6.2" rx="1.9" ry="2.3" fill="#052018"/>
-        <ellipse cx="9.2" cy="3.2" rx="1.6" ry="1.8" fill="#052018"/>
-        <ellipse cx="14.8" cy="3.5" rx="1.6" ry="1.9" fill="#052018"/>
-      </svg>
-    </div>
-    <div>
-      <h1>benji</h1>
-      <p>nonchalant maltese · somber playlists · matcha appreciator</p>
-    </div>
-  </div>
-
+  <h1>benji</h1>
   <nav>
-    <button class="btn">About</button>
-    <button class="btn">Gallery</button>
-    <button class="btn">Playlist</button>
-    <button class="btn cta">Treats</button>
+    <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">About</button>
+    <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">Gallery</button>
+    <button onclick="document.getElementById('music').scrollIntoView({behavior:'smooth'})">Music</button>
+    <button onclick="document.getElementById('fun-facts').scrollIntoView({behavior:'smooth'})" style="background:#ef233c;color:#fff;border:none;">Fun Facts</button>
   </nav>
 </header>
 
-<section class="hero">
-  <div class="hero-card">
-    <div class="intro">
-      <h2>benji — cool, white, and quietly profound</h2>
-      <div class="sub">Benji is a white Maltese with an aura of detached elegance. He nods at lo-fi beats, judges you subtly, and enjoys ceremonial matcha (for the vibes).</div>
-
-      <div class="traits" aria-hidden>
-        <span class="pill">Breed: Maltese</span>
-        <span class="pill">Age: 3 years</span>
-        <span class="pill">Aura: Nonchalant</span>
-        <span class="pill">Fav Genre: Somber indie / lo-fi / bedroom pop</span>
-        <span class="pill">Ritual: Matcha-watching</span>
-      </div>
-
-      <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
-        <button class="btn">See gallery</button>
-        <button class="btn cta">Listen to benji's playlist</button>
-      </div>
-
-      <div style="margin-top:18px;color:var(--muted);font-size:13px">
-        <strong>Personality dossier:</strong>
-        <p style="margin:6px 0">Benji prefers slow sunbeams, long naps in geometric patches of light, and a melodic hum of minimal piano while he contemplates life. He is unimpressed with loud toys but adores soft vinyl crackle and the faint steam hiss of matcha being whisked. He will stare into the distance until you apologize for your existence — then accept a treat.</p>
-      </div>
+<section class="hero" aria-label="Introduction to Benji">
+  <div class="hero-content">
+    <h2>benji — the performative, fashion-forward maltese</h2>
+    <p>Balenciaga-inspired elegance meets indie music obsession. Benji’s a white Maltese with a taste for <strong>2 Hollis</strong>, <strong>Sombur</strong>, and even some <strong>George Harrison</strong> vibes. Loves chicken, hates bad music, and has a boyfriend named Logi.</p>
+    <div class="traits" aria-label="Benji's traits and favorites">
+      <span class="trait-pill">Breed: Maltese</span>
+      <span class="trait-pill">Age: 3 years</span>
+      <span class="trait-pill">Favorite artists: 2 Hollis, Sombur, George Harrison</span>
+      <span class="trait-pill">Boyfriend: Logi ❤️</span>
+      <span class="trait-pill">Favorite food: Chicken</span>
+      <span class="trait-pill">Style: Balenciaga meets indie cool</span>
+    </div>
+    <div class="btn-group" role="group" aria-label="Quick actions">
+      <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">View Gallery</button>
+      <button onclick="document.getElementById('music').scrollIntoView({behavior:'smooth'})">Listen to Playlist</button>
     </div>
   </div>
-
-  <aside class="card-aside">
-    <div class="benji-photo">
-      <!-- working, dynamic image fetching from Unsplash by query -->
-      <img src="https://source.unsplash.com/800x1000/?white+maltese" alt="Benji the Maltese">
-    </div>
-    <div class="floating-paw">🐾</div>
-  </aside>
+  <div class="hero-image" aria-label="Photo of Benji the white Maltese dog">
+    <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=600&q=80" alt="Benji the white Maltese dog looking elegant" loading="lazy" />
+    <div class="floating-paw" aria-hidden="true">🐾</div>
+  </div>
 </section>
 
-<!-- dense information grid -->
-<section class="grid" aria-label="benji information">
-  <div class="panel">
-    <h3>Signature Sounds — Playlist & influences</h3>
-    <p class="small">Benji's sonic world: lo-fi piano, melancholic singer-songwriter, low-volume ambient, analog tape textures.</p>
-    <div class="playlist" style="margin-top:10px">
-      <div class="track">
-        <img src="https://source.unsplash.com/80x80/?vinyl,music" alt="">
-        <div class="meta">
-          <strong>Track: Rain On The Window</strong>
-          <span>Artist: Pale Room · 3:28 · mood: contemplative</span>
-        </div>
-        <div style="font-weight:700;color:var(--muted)">♡</div>
-      </div>
+<section class="info-grid" id="about" aria-label="About Benji">
+  <article class="card">
+    <h3>About Benji</h3>
+    <p>Benji lives a performative life filled with music and fashion. His favorite artists are <strong>2 Hollis</strong> and <strong>Sombur</strong>, whom he listens to on repeat, plus a soft spot for classic George Harrison tunes. He's a connoisseur of chicken and enjoys his meals with his boyfriend, Logi.</p>
+    <p>Despite his chill vibes, Benji thinks <strong>Niamh</strong>'s taste in music is tragic — especially her obsession with <em>Led Zeppelin</em>. “Terrible,” he says with a side-eye, preferring more nuanced, indie soundscapes over classic rock excess.</p>
+  </article>
 
-      <div class="track">
-        <img src="https://source.unsplash.com/80x80/?piano,lofi" alt="">
-        <div class="meta">
-          <strong>Track: Green Tea Tape</strong>
-          <span>Artist: Matcha Hour · 2:44 · mood: warm static</span>
-        </div>
-        <div style="font-weight:700;color:var(--muted)">♡</div>
-      </div>
-
-      <div class="track">
-        <img src="https://source.unsplash.com/80x80/?ambient,album" alt="">
-        <div class="meta">
-          <strong>Track: Slow Sun</strong>
-          <span>Artist: Dusk / Loft · 4:16 · mood: slow exhale</span>
-        </div>
-        <div style="font-weight:700;color:var(--muted)">♡</div>
-      </div>
-
-      <p class="small" style="margin-top:8px">Tip: Play at low volume with gentle vinyl cracks for optimal Benji approval.</p>
+  <article class="card" id="music" aria-label="Benji's favorite music">
+    <h3>Benji's Signature Playlist</h3>
+    <p>Enjoy the curated sounds Benji vibes to daily.</p>
+    <div class="music-embed">
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2MyUCsl25eb" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media" loading="lazy"></iframe>
     </div>
-  </div>
+    <p style="margin-top:1rem; color: var(--accent); font-weight: 700;">Shade alert:</p>
+    <p style="text-decoration: line-through; color: var(--muted);">Led Zeppelin (Niamh’s choice) — Not approved by Benji</p>
+  </article>
 
-  <div class="panel">
-    <h3>Matcha Rituals</h3>
-    <div class="matcha">
-      <img src="https://source.unsplash.com/320x320/?matcha,tea" alt="matcha">
-      <div>
-        <p class="small">Benji respects matcha ceremony aesthetics — the whisk motion, the delicate foam, the quiet hum of a kettle. He will approach politely, sniff, and then resume his contemplative stare. Here's a micro-ritual:</p>
-        <ol class="small" style="margin:8px 0 0 18px">
-          <li>Whisk matcha slowly, in circular strokes.</li>
-          <li>Place cup at low angle where Benji naps.</li>
-          <li>Allow 10 seconds of silence while Benji inspects the rim.</li>
-          <li>Sip. Offer a treat (tiny, dog-safe), never the hot tea.</li>
-        </ol>
+  <article class="card" id="gallery" aria-label="Gallery of Benji and Balenciaga fashion">
+    <h3>Gallery</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 1rem;">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="White Maltese dog looking poised" loading="lazy" style="border-radius: 12px; box-shadow: 0 10px 30px #ef233c99;" />
+      <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=400&q=80" alt="White Maltese closeup" loading="lazy" style="border-radius: 12px; box-shadow: 0 10px 30px #ef233c99;" />
+      <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=400&q=80" alt="Model walking Balenciaga runway" loading="lazy" style="border-radius: 12px; box-shadow: 0 10px 30px #ef233c99;" />
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Another Balenciaga fashion runway" loading="lazy" style="border-radius: 12px; box-shadow: 0 10px 30px #ef233c99;" />
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--muted); font-style: italic;">
+      Benji’s world: the perfect blend of canine elegance and high fashion.
+    </p>
+  </article>
+</section>
+
+<section class="info-grid" id="fun-facts" aria-label="Fun facts about Benji">
+  <article class="flip-container" tabindex="0" aria-label="Loves chicken fun fact">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        Loves Chicken 🍗
+      </div>
+      <div class="flip-card-back">
+        Benji’s favorite treat is anything chicken-flavored. Soft, juicy, and always appreciated after a long day of judging humans.
       </div>
     </div>
-  </div>
+  </article>
 
-  <div class="panel">
-    <h3>Health & Care (extensive)</h3>
-    <p class="small">Benji's routine and notes — grooming, diet, exercise, vet schedule.</p>
-    <ul class="small" style="margin:8px 0 0 18px">
-      <li>Grooming: weekly brushing; full groom every 8–10 weeks.</li>
-      <li>Diet: high-quality small-breed kibble + occasional steamed sweet potato.</li>
-      <li>Exercise: 20–30 min walks & indoor scent games.</li>
-      <li>Vet: vaccinations up to date; dental clean recommended annually.</li>
-      <li>Allergies: mild seasonal sniffles — monitored.</li>
-    </ul>
-  </div>
-
-  <div class="panel">
-    <h3>Gallery (action & stills)</h3>
-    <div class="gallery" style="margin-top:10px">
-      <img src="https://source.unsplash.com/400x300/?maltese,dog" alt="">
-      <img src="https://source.unsplash.com/400x300/?maltese,puppy" alt="">
-      <img src="https://source.unsplash.com/400x300/?cute,white+dog" alt="">
-      <img src="https://source.unsplash.com/400x300/?dog,grass" alt="">
-      <img src="https://source.unsplash.com/400x300/?dog,park" alt="">
-      <img src="https://source.unsplash.com/400x300/?maltese,portrait" alt="">
-    </div>
-    <p class="small" style="margin-top:10px">Hover each image for a subtle lift. Replace these with Benji's personal photos by swapping the `src` URLs.</p>
-  </div>
-
-  <div class="panel">
-    <h3>Timeline: benji's life in tiny epochs</h3>
-    <div class="timeline" style="margin-top:8px">
-      <div class="event"><div class="dot"></div><div class="desc">Born on a rainy Tuesday — first nap at 3 hours old.</div></div>
-      <div class="event"><div class="dot"></div><div class="desc">First matcha encounter — inspected the whisk, ignored the steam.</div></div>
-      <div class="event"><div class="dot"></div><div class="desc">Discovered soft jazz; now prefers somber guitar at dawn.</div></div>
-      <div class="event"><div class="dot"></div><div class="desc">Made a friend named Olive (the neighborhood cat) — mutual disdain achieved.</div></div>
-    </div>
-  </div>
-
-  <div class="panel" style="grid-column:span 3">
-    <h3>Obsessive details (because you asked for overwhelming info)</h3>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px">
-      <div style="background:var(--glass);padding:10px;border-radius:8px">
-        <strong>Sleep Cycle</strong>
-        <p class="small">16–18h/day; peak contemplation 2–4pm.</p>
+  <article class="flip-container" tabindex="0" aria-label="Boyfriend named Logi fun fact">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        Boyfriend: Logi ❤️
       </div>
-      <div style="background:var(--glass);padding:10px;border-radius:8px">
-        <strong>Favorite toy</strong>
-        <p class="small">Worn beige sock-shaped squeaker (relegated to aesthetic duty now).</p>
-      </div>
-      <div style="background:var(--glass);padding:10px;border-radius:8px">
-        <strong>Command responsiveness</strong>
-        <p class="small">Responds to whisper+hand wave; ignores capital-letter shouting.</p>
-      </div>
-      <div style="background:var(--glass);padding:10px;border-radius:8px">
-        <strong>Photogenic index</strong>
-        <p class="small">High — prefers side-lighting and soft shadows. Bring props: matcha bowl + vintage vinyl.</p>
+      <div class="flip-card-back">
+        Logi is Benji’s partner in crime and chill vibes. They love slow mornings, matcha rituals, and indie playlists together.
       </div>
     </div>
+  </article>
 
-    <div style="margin-top:10px;color:var(--muted);font-size:13px">
-      <p><strong>Detailed notes:</strong> Benji will exhibit mild head-tilt when you play minor-key piano. He prefers sofa corners and will relocate to wherever the sunbeam flows. He judges laser pointers, approves of slow hand scratches, and will accept photographers who kneel.</p>
+  <article class="flip-container" tabindex="0" aria-label="Fashion Icon fun fact">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        Fashion Icon ✨
+      </div>
+      <div class="flip-card-back">
+        Always ready for a runway, Benji’s look is curated with Balenciaga-level nonchalance and minimalism.
+      </div>
     </div>
-  </div>
+  </article>
+
+  <article class="flip-container" tabindex="0" aria-label="Niamh's music taste fun fact">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        Shade Alert 🚫🎸
+      </div>
+      <div class="flip-card-back">
+        Benji thinks Niamh’s obsession with Led Zeppelin is “terrible.” Indie beats over rock solos any day.
+      </div>
+    </div>
+  </article>
 </section>
 
 <footer>
-  <div>
-    <strong>benji</strong> · white maltese · <span style="color:var(--muted)">resident matcha connoisseur</span>
-  </div>
-  <div style="display:flex;gap:12px;align-items:center">
-    <span class="small">Built with ✨ for Benji</span>
-    <button class="btn">Download PDF</button>
-  </div>
+  &copy; 2025 benji’s world — All rights reserved. Crafted with ❤️ and indie vibes.
 </footer>
 
-<div class="paw" title="peek">🐶</div>
-<div class="popover">Benji demands respectful silence and gentle snacks. Click the gallery to see more.</div>
-
-<!-- small script for a few UI niceties -->
-<script>
-  // small lazy loading and click behaviors
-  document.querySelectorAll('img').forEach(img=>{
-    img.loading = 'lazy';
-  });
-
-  // Download placeholder: generate printable page
-  document.querySelector('footer .btn').addEventListener('click', async ()=>{
-    alert('To get a printable profile, use Print → Save as PDF in your browser. Want me to auto-generate a PDF? Ask and I will create one for download.');
-  });
-
-  // paw popover toggle (mobile friendly)
-  const paw = document.querySelector('.paw');
-  paw.addEventListener('click', ()=> {
-    const pop = document.querySelector('.popover');
-    pop.style.display = pop.style.display === 'block' ? 'none' : 'block';
-    setTimeout(()=>{ if(pop.style.display==='block') pop.style.display = 'none'; }, 6000);
-  });
-</script>
 </body>
 </html>
